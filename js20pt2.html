@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+.droptarget {
+  float: left; 
+  width: 100px; 
+  height: 35px;
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+</style>
+</head>
+
+
+<body>
+
+    Enter your name: <input type="text" name="fname" id="fname" onblur="HI()">
+    
+    <p>When you leave the input field, a function is triggered which transforms the input text to upper case.</p>
+
+
+<p>Drag the p element back and forth between the two rectangles:</p>
+
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <p ondragstart="dragStart(event)" draggable="true" id="dragtarget">Drag me!</p>
+</div>
+
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<p style="clear:both;" id="demo"></p>
+
+<input type="text" onpaste="BYE()" value="Try to paste something in here" size="40">
+<p id="demo"></p>
+
+
+<p>Write something in the text field to trigger a function.</p>
+<input type="text" id="myInput" oninput="goodmorning()">
+<p id="demo"></p>
+
+<p>Open the details.</p>
+
+<details ontoggle="ME()">
+<summary>Copyright 1999-2014.</summary>
+<p> - by Refsnes Data. All Rights Reserved.</p>
+<p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+</details>
+<script>
+    function HI() {
+      var x = document.getElementById("fname");
+      x.value = x.value.toUpperCase();
+    }
+function dragStart(event) {
+  event.dataTransfer.setData("Text", event.target.id);
+  document.getElementById("demo").innerHTML = "Started to drag the p element";
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drop(event) {
+  event.preventDefault();
+  var data = event.dataTransfer.getData("Text");
+  event.target.appendChild(document.getElementById(data));
+  document.getElementById("demo").innerHTML = "The p element was dropped";
+}
+
+function BYE() {
+  document.getElementById("demo").innerHTML = "You pasted text!";
+}
+
+function goodmorning() {
+  var x = document.getElementById("myInput").value;
+  document.getElementById("demo").innerHTML = "You wrote: " + x;
+}
+
+function ME() {
+  alert("The ontoggle event occured");
+}
+</script>
+       </body>
+</html>
